@@ -117,6 +117,7 @@ xgrid();
 
 Output Waveform
 
+<img width="959" height="539" alt="image" src="https://github.com/user-attachments/assets/9eb481b8-7c1d-4b2c-bc10-7daf822ed775" />
 
 
 
