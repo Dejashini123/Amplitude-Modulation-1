@@ -75,6 +75,43 @@ Compare the original modulating signal with the demodulated signal. PROCEDURE
 •	Verify the generated waveform using Tabulation and Model Waveform
 
 Program
+```clc;
+clear;
+close;
+
+// Parameters (based on table value)
+Am = 14;        // Message amplitude (table value)
+Ac = 28;        // Carrier amplitude (Am * 2)
+fm = 10;        // Message frequency (Hz)
+fc = 100;       // Carrier frequency (fm * 10)
+mu = 0.5;       // Modulation index
+fs = 1000;      // Sampling frequency (fc * 10)
+t = 0:1/fs:1;   // Time vector (1 sec)
+
+// Message signal
+m = Am * cos(2 * %pi * fm * t);
+
+// Carrier signal
+c = Ac * cos(2 * %pi * fc * t);
+
+// AM signal (standard)
+s = (Ac + mu * m) .* cos(2 * %pi * fc * t);
+
+// Plot signals
+subplot(3,1,1);
+plot(t, m);
+xtitle("Message Signal");
+
+subplot(3,1,2);
+plot(t, c);
+xtitle("Carrier Signal");
+
+subplot(3,1,3);
+plot(t, s);
+xtitle("AM Signal");
+
+xgrid();
+```
 
 
 
