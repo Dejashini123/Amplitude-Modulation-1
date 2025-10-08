@@ -75,50 +75,49 @@ Compare the original modulating signal with the demodulated signal. PROCEDURE
 •	Verify the generated waveform using Tabulation and Model Waveform
 
 Program
-```clc;
+```
+clc;
 clear;
 close;
-
-// Parameters (based on table value)
-Am = 14;        // Message amplitude (table value)
-Ac = 28;        // Carrier amplitude (Am * 2)
-fm = 10;        // Message frequency (Hz)
-fc = 100;       // Carrier frequency (fm * 10)
-mu = 0.5;       // Modulation index
-fs = 1000;      // Sampling frequency (fc * 10)
-t = 0:1/fs:1;   // Time vector (1 sec)
-
-// Message signal
-m = Am * cos(2 * %pi * fm * t);
-
-// Carrier signal
-c = Ac * cos(2 * %pi * fc * t);
-
-// AM signal (standard)
-s = (Ac + mu * m) .* cos(2 * %pi * fc * t);
-
-// Plot signals
-subplot(3,1,1);
-plot(t, m);
-xtitle("Message Signal");
-
-subplot(3,1,2);
-plot(t, c);
-xtitle("Carrier Signal");
-
-subplot(3,1,3);
-plot(t, s);
-xtitle("AM Signal");
-
+Ac=14.8;
+Am=7.4;
+Fc=4000;
+Fm=400;
+Fs=40000;
+t=0:1/Fs:2/Fm;
+E1=Am*sin(2*%pi*Fm*t);
+subplot(4,1,1);
+plot(t,E1);
+xlabel("Time(s");
+ylabel("Amplitude");
+title("Message Signal");
+E2=Ac*sin(2*%pi*Fc*t);
+subplot(4,1,2);
+plot(t,E2);
+xlabel("Time(s");
+ylabel("Amplitude");
+title("Carrier Signal");
+E3=(Ac+Am*sin(2*%pi*Fm*t)).*sin(2*%pi*Fc*t);
+subplot(4,1,3);
+plot(t,E3);
+xlabel("Time(s");
+ylabel("Amplitude");
+title("AM Signal");
+demodulated_signal=abs(hilbert(E3))-Ac;
+subplot(4,1,4);
+plot(t,demodulated_signal);
+xlabel("Time(s");
+ylabel("Amplitude");
+title("Demodulated Signal");
 xgrid();
+
 ```
 
 
 
 Output Waveform
 
-<img width="959" height="539" alt="image" src="https://github.com/user-attachments/assets/9eb481b8-7c1d-4b2c-bc10-7daf822ed775" />
-
+<img width="1918" height="1198" alt="image" src="https://github.com/user-attachments/assets/da0bd2fd-41d7-4ab9-8ec4-5e518d41013e" />
 
 
 
@@ -127,8 +126,8 @@ TABULATION:
 
 
 Calculation
-1.	ma (Theory) = am/ac =
-2.	ma(Practical) = (Emax-Emin)/(Emax+Emin) =
+1.	ma (Theory) = am/ac =0.5
+2.	ma(Practical) = (Emax-Emin)/(Emax+Emin) =0.2540
 
 
 MODEL GRAPH
